@@ -13,9 +13,7 @@ app.get('/hello', clerkMiddleware(), (c) => {
       error: `unauthorized`,
     });
   }
-  return c.json({
-    message: 'Hello Next.js!',
-  });
+  return c.json({});
 });
 
 export const GET = handle(app);
