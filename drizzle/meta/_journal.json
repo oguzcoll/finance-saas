@@ -1,0 +1,20 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1752161937018,
+      "tag": "0000_burly_morbius",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1752163430585,
+      "tag": "0001_naive_maximus",
+      "breakpoints": true
+    }
+  ]
+}
