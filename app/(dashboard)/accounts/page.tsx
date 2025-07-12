@@ -50,8 +50,8 @@ const AccountsPage = () => {
             columns={columns}
             data={accounts}
             filterKey='email'
-            onDelete={(row) => {
-              const ids = row.map((r) => r.original.id);
+            onDelete={(rows) => {
+              const ids = rows.map((r) => r.original.id);
               deleteAccounts.mutate({ ids });
             }}
           />

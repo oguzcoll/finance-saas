@@ -22,6 +22,44 @@ const app = new Hono()
 
     return c.json({ data });
   })
+  .get(
+    '/:id',
+    zValidator(
+      'param',
+      z.object({
+        id: z.string().optional(),
+      })
+    ),
+    clerkMiddleware(),
+    async (c) => {
+      const auth = getAuth(c);
+      const values = c.req.valid('param');
+
+      if (!auth?.userId) {
+        return c.json({ error: 'Unauthorized' }, 401);
+      }
+
+      if (!values.id) {
+        return c.json({ error: 'Account ID is required' }, 400);
+      }
+
+      const data = await db
+        .select({
+          id: accounts.id,
+          name: accounts.name,
+        })
+        .from(accounts)
+        .where(
+          and(eq(accounts.userId, auth.userId), eq(accounts.id, values.id))
+        );
+
+      if (data.length === 0) {
+        return c.json({ error: 'Account not found' }, 404);
+      }
+
+      return c.json({ data: data[0] });
+    }
+  )
   .post(
     '/',
     clerkMiddleware(),
