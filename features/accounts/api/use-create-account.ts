@@ -10,7 +10,6 @@ export const useCreateAccount = () => {
   const queryClient = useQueryClient();
   const mutation = useMutation<ResponseType, Error, RequestType>({
     mutationFn: async (json) => {
-      console.log('Creating account with data:', json);
       const response = await client.api.accounts.$post({ json });
       return await response.json();
     },
