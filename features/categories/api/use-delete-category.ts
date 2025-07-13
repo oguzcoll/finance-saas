@@ -4,26 +4,26 @@ import { InferResponseType } from 'hono';
 import { toast } from 'sonner';
 
 type ResponseType = InferResponseType<
-  (typeof client.api.accounts)[':id']['$delete']
+  (typeof client.api.categories)[':id']['$delete']
 >;
 
-export const useDeleteAccount = (id?: string) => {
+export const useDeleteCategory = (id?: string) => {
   const queryClient = useQueryClient();
   const mutation = useMutation<ResponseType, Error>({
     mutationFn: async () => {
-      const response = await client.api.accounts[':id']['$delete']({
+      const response = await client.api.categories[':id']['$delete']({
         param: { id },
       });
       return await response.json();
     },
     onSuccess: () => {
-      toast.success('Account  successfully Deleted');
-      queryClient.invalidateQueries({ queryKey: ['account', { id }] });
-      queryClient.invalidateQueries({ queryKey: ['accounts'] });
+      toast.success('Category  successfully Deleted');
+      queryClient.invalidateQueries({ queryKey: ['category', { id }] });
+      queryClient.invalidateQueries({ queryKey: ['categories'] });
       //TODO INVALIDATE SUMMARY AND TRASNACTIONS QUERIES
     },
     onError: () => {
-      toast.error('Failed to delete account');
+      toast.error('Failed to delete Category');
     },
   });
   return mutation;
