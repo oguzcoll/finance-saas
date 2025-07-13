@@ -9,10 +9,10 @@ import {
 import { AccountForm } from './account-form';
 import { insertAccountSchema } from '@/db/schema';
 import z from 'zod';
-import { useCreateAccount } from '../api/use-create-account';
 import { useOpenAccount } from '../hooks/use-open-account';
 import { useGetAccount } from '../api/use-get-account';
 import { Loader2 } from 'lucide-react';
+import { useEditAccount } from '@/features/accounts/api/use-edit-account';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const formSchema = insertAccountSchema.pick({
   name: true,
@@ -24,11 +24,13 @@ const EditAccountSheet = () => {
   const { isOpen, onClose, id } = useOpenAccount();
 
   const accountQuery = useGetAccount(id);
+  const editMutation = useEditAccount(id);
+
+  const isPending = editMutation.isPending;
 
   const isLoading = accountQuery.isLoading;
-  const mutation = useCreateAccount();
   const onSubmit = (values: FormValues) => {
-    mutation.mutate(values, {
+    editMutation.mutate(values, {
       onSuccess: () => {
         onClose();
       },
@@ -54,7 +56,7 @@ const EditAccountSheet = () => {
           <AccountForm
             id={id}
             onSubmit={onSubmit}
-            disabled={mutation.isPending}
+            disabled={isPending}
             defaultValues={defaultValues}
           />
         )}
