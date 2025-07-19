@@ -29,7 +29,7 @@ const TableHeadSelect = ({ columnIndex, selectedColumns, onChange }: Props) => {
         <SelectValue placeholder='Skip' />
       </SelectTrigger>
       <SelectContent>
-        <SelectItem value='Skip'>Skip</SelectItem>
+        <SelectItem value='skip'>Skip</SelectItem>
         {options.map((option, index) => {
           const disabled =
             Object.values(selectedColumns).includes(option) &&

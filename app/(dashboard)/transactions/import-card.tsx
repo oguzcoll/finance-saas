@@ -32,7 +32,10 @@ const ImportCard = ({ data, onCancel, onSubmit }: Props) => {
     value: string | null
   ) => {
     setSelectedColumns((prev) => {
+      console.log('prev:', prev);
       const newSelectedColumns = { ...prev };
+      console.log('newSelectedColumns:', newSelectedColumns);
+
       for (const key in newSelectedColumns) {
         if (newSelectedColumns[key] === value) {
           newSelectedColumns[key] = null; // Clear the previous selection
@@ -78,6 +81,7 @@ const ImportCard = ({ data, onCancel, onSubmit }: Props) => {
         return acc;
       }, {});
     });
+
     const formattedData = arrayOfData.map((item) => ({
       ...item,
       amount: convertAmountToMiliunits(parseFloat(item.amount)),
