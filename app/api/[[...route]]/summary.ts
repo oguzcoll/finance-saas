@@ -37,7 +37,7 @@ const app = new Hono().get(
     const lastPeriodStart = subDays(endDate, periodLength);
     const lastPeriodEnd = subDays(endDate, periodLength);
 
-    async function fetchFinanialData(
+    async function fetchFinancialData(
       userId: string,
       startDate: Date,
       endDate: Date
@@ -66,15 +66,16 @@ const app = new Hono().get(
         );
     }
 
-    const [currentPeriod] = await fetchFinanialData(
+    const [currentPeriod] = await fetchFinancialData(
       auth.userId,
       startDate,
       endDate
     );
-    const [lastPeriod] = await fetchFinanialData(
+
+    const [lastPeriod] = await fetchFinancialData(
       auth.userId,
-      startDate,
-      endDate
+      lastPeriodStart,
+      lastPeriodEnd
     );
 
     const incomeChange = calculatePercentageChange(
