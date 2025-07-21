@@ -10,6 +10,7 @@ import {
 } from './ui/card';
 import { CountUp } from '@/components/count-up';
 import { Skeleton } from './ui/skeleton';
+
 const boxVariant = cva('shrink-0 rounded-md p-3', {
   variants: {
     variant: {
@@ -85,7 +86,8 @@ export const DataCard = ({
             percentageChange < 0 && 'text-rose-500'
           )}
         >
-          {formatPercentage(percentageChange)} from last Period
+          {formatPercentage(percentageChange, { addPrefix: true })} from last
+          Period
         </p>
       </CardContent>
     </Card>
