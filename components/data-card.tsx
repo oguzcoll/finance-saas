@@ -73,7 +73,7 @@ export const DataCard = ({
           <CountUp
             preserveValue
             start={0}
-            end={value}
+            end={value ?? 0}
             decimals={2}
             decimalPlaces={2}
             formattingFn={formatCurrency}

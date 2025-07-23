@@ -4,11 +4,9 @@ import {
   Legend,
   RadialBarChart,
   ResponsiveContainer,
-  Tooltip,
 } from 'recharts';
 
 import { formatCurrency } from '@/lib/utils';
-import { CategoryTooltip } from './category-tooltip';
 const COLORS = ['#0062FF', '#12C6FF', '#FF647F', '#FF9354'];
 
 type Props = {
@@ -68,7 +66,6 @@ export const RadialVariant = ({ data }: Props) => {
             );
           }}
         />
-        <Tooltip content={<CategoryTooltip />} />
       </RadialBarChart>
     </ResponsiveContainer>
   );
